@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: theme(colors.brand.bg);
+  color: theme(colors.brand.text);
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+:focus-visible {
+  outline: 2px solid theme(colors.brand.accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.hero-glow {
+  background: radial-gradient(60% 60% at 80% 20%, rgba(61,99,221,0.12), transparent 70%),
+              radial-gradient(40% 40% at 10% 80%, rgba(176,138,78,0.10), transparent 70%);
+}
+.pill {
+  @apply inline-block rounded-full bg-brand-accent2/10 text-brand-accent2 text-xs px-3 py-1;
+}
+
+.container-px {
+  @apply mx-auto max-w-6xl px-4 sm:px-6;
+}
+
+/* Hero network animations */
+@keyframes gc-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes gc-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+@keyframes gc-signal { from { stroke-dashoffset: 8; } to { stroke-dashoffset: -100; } }
+@keyframes gc-pulse { 0% { transform: scale(1); opacity: .5; } 100% { transform: scale(1.7); opacity: 0; } }
+
+.gc-in { animation: gc-in .7s cubic-bezier(.16, 1, .3, 1) both; animation-delay: var(--d, 0s); }
+.gc-float { animation: gc-float var(--dur, 5s) ease-in-out var(--d, 0s) infinite; }
+.gc-signal { stroke-dasharray: 8 92; animation: gc-signal var(--dur, 3.5s) linear var(--d, 0s) infinite; }
+.gc-pulse { animation: gc-pulse 3s ease-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .gc-in, .gc-float, .gc-pulse { animation: none !important; }
+  .gc-signal { animation: none !important; opacity: 0; }
+}
+
+@keyframes gc-flip {
+  0%, 40% { transform: perspective(600px) rotateX(0deg); }
+  50%, 90% { transform: perspective(600px) rotateX(180deg); }
+  100% { transform: perspective(600px) rotateX(360deg); }
+}
+.gc-flip { transform-style: preserve-3d; animation: gc-flip 8s ease-in-out var(--fd, 0s) infinite; }
+
+.gc-glow { position: relative; isolation: isolate; border-radius: 1rem; }
+.gc-glow::before {
+  content: ""; position: absolute; inset: -2px; z-index: -1; border-radius: 1.15rem;
+  background: linear-gradient(-45deg, var(--c1), var(--c2)); background-size: 220% 220%;
+  transition: background-position .6s cubic-bezier(.175, .885, .32, 1.275), transform .6s cubic-bezier(.175, .885, .32, 1.275);
+}
+.gc-glow::after {
+  content: ""; position: absolute; inset: 0; z-index: -2; border-radius: 1rem;
+  background: linear-gradient(-45deg, var(--c1), var(--c2));
+  transform: scale(.95); filter: blur(18px); opacity: .3; transition: filter .4s, opacity .4s;
+}
+.gc-glow:hover::before { background-position: 100% 100%; transform: rotate(-1.5deg) scale(1.02); }
+.gc-glow:hover::after { filter: blur(28px); opacity: .55; }
+.gc-glow-blue { --c1: #3D63DD; --c2: #0E9F6E; }
+.gc-glow-green { --c1: #0E9F6E; --c2: #B08A4E; }
+.gc-glow-gold { --c1: #B08A4E; --c2: #3D63DD; }
