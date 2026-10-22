@@ -72,7 +72,7 @@ jobs:
             const fs = require('fs');
             const config = {
               apps: [{
-                name: 'Gulfcart',
+                name: 'Gulfcart-main',
                 script: '.next/standalone/server.js',
                 cwd: process.cwd(),
                 env: {
