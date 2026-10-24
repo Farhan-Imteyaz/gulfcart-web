@@ -160,7 +160,7 @@ function Curves({
 export default function SystemSection() {
   return (
     <section className="py-20 md:py-24">
-      <div className="container-px">
+      <div className="container">
         <div className="mx-auto max-w-2xl text-center">
           <span className="pill">One checkout layer</span>
           <h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl">

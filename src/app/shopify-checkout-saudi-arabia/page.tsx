@@ -350,7 +350,7 @@ function Split({
     },
   }[tone];
   return (
-    <section className="container-px py-12 sm:py-16">
+    <section className="container py-12 sm:py-16">
       <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
         <div className={flip ? "lg:order-last" : ""}>
           <span className="pill border border-brand-accent2/20 font-medium">
@@ -412,7 +412,7 @@ export default function Page() {
     <>
       {/* HERO */}
       <section className="hero-glow relative overflow-hidden">
-        <div className="container-px py-12 sm:py-16 lg:py-20">
+        <div className="container py-12 sm:py-16 lg:py-20">
           <div className="grid items-center gap-10 lg:grid-cols-[45fr_55fr] lg:gap-8">
             <div className="gc-in max-w-xl lg:max-w-none">
               <span className="pill border border-brand-accent2/20 font-medium">
@@ -442,7 +442,7 @@ export default function Page() {
 
       {/* STATS */}
       <section className="border-y border-gray-500/20 bg-brand-surface">
-        <div className="container-px grid gap-6 py-10 sm:grid-cols-3 sm:py-12">
+        <div className="container grid gap-6 py-10 sm:grid-cols-3 sm:py-12">
           {stats.map((s, i) => (
             <GlowCard key={s.l} i={i}>
               <span
@@ -457,7 +457,7 @@ export default function Page() {
       </section>
 
       {/* PROBLEM */}
-      <section className="container-px py-14 sm:py-20">
+      <section className="container py-14 sm:py-20">
         <Head
           pill="Why Saudi stores lose orders"
           title="Your Saudi traffic is fine. Your checkout leaks."
@@ -528,7 +528,7 @@ export default function Page() {
       </Split>
 
       {/* METHODS */}
-      <section className="container-px py-14 sm:py-20">
+      <section className="container py-14 sm:py-20">
         <Head
           pill="Shopify payment gateway Saudi Arabia"
           title="The payment methods Saudi buyers expect"
@@ -587,7 +587,7 @@ export default function Page() {
       </Split>
 
       {/* EXPANSION */}
-      <section className="container-px py-14 sm:py-20">
+      <section className="container py-14 sm:py-20">
         <Head
           pill="UAE to Saudi Arabia"
           title="Expand a UAE Shopify store into Saudi Arabia"
@@ -611,7 +611,7 @@ export default function Page() {
       </section>
 
       {/* COUNTRY LINKS */}
-      <section className="container-px pb-6">
+      <section className="container pb-6">
         <div className="grid gap-6 sm:grid-cols-2">
           {[
             {
@@ -639,7 +639,7 @@ export default function Page() {
       </section>
 
       {/* FAQ */}
-      <section className="container-px py-14 sm:py-20">
+      <section className="container py-14 sm:py-20">
         <Head
           pill="FAQ"
           title="Shopify checkout in Saudi Arabia: common questions"
@@ -677,7 +677,7 @@ export default function Page() {
       </section>
 
       {/* FINAL CTA */}
-      <section className="container-px pb-20 sm:pb-28">
+      <section className="container pb-20 sm:pb-28">
         <div className="hero-glow rounded-3xl border border-gray-500/20 bg-gradient-to-br from-brand-accent/[0.08] via-white to-brand-surface px-6 py-12 text-center sm:py-16">
           <h2 className="mx-auto max-w-xl text-2xl font-semibold tracking-tight sm:text-3xl">
             Convert more of your Saudi traffic at checkout

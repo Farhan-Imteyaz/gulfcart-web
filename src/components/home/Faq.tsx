@@ -23,7 +23,7 @@ const faqs = [
 
 export default function Faq() {
   return (
-    <section className="relative overflow-hidden container-px py-8 sm:py-10 md:py-12">
+    <section className="relative overflow-hidden container py-8 sm:py-10 md:py-12">
       <div className="grid gap-10 md:grid-cols-[0.9fr_1.4fr] md:gap-14 lg:gap-20">
         {/* Left — heading column */}
         <div className="md:sticky md:top-24 md:self-start">

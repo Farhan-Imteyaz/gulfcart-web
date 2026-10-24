@@ -157,10 +157,7 @@ export default function Header() {
         id="mobile-nav"
         className={`overflow-y-auto border-gray-500/20 bg-white transition-[max-height] duration-300 md:hidden ${menu ? "max-h-[80vh] border-t" : "max-h-0"}`}
       >
-        <nav
-          aria-label="Mobile"
-          className="container-px space-y-1 py-4 text-sm"
-        >
+        <nav aria-label="Mobile" className="container space-y-1 py-4 text-sm">
           {navGroups.map((g) => (
             <details key={g.label} className="group rounded-xl">
               <summary className="flex cursor-pointer list-none items-center justify-between rounded-xl px-3 py-3 font-medium hover:bg-tile-hover">

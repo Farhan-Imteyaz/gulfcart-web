@@ -347,7 +347,7 @@ function Split({
     },
   }[tone];
   return (
-    <section className="container-px py-12 sm:py-16">
+    <section className="container py-12 sm:py-16">
       <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
         <div className={flip ? "lg:order-last" : ""}>
           <span className="pill border border-brand-accent2/20 font-medium">
@@ -409,7 +409,7 @@ export default function Page() {
     <>
       {/* HERO */}
       <section className="hero-glow relative overflow-hidden">
-        <div className="container-px py-12 sm:py-16 lg:py-20">
+        <div className="container py-12 sm:py-16 lg:py-20">
           <div className="grid items-center gap-10 lg:grid-cols-[45fr_55fr] lg:gap-8">
             <div className="gc-in max-w-xl lg:max-w-none">
               <span className="pill border border-brand-accent2/20 font-medium">
@@ -440,7 +440,7 @@ export default function Page() {
 
       {/* STATS */}
       <section className="border-y border-gray-500/20 bg-brand-surface">
-        <div className="container-px grid gap-3 py-8 sm:grid-cols-3 sm:gap-4 sm:py-10">
+        <div className="container grid gap-3 py-8 sm:grid-cols-3 sm:gap-4 sm:py-10">
           {stats.map((s) => (
             <div
               key={s.l}
@@ -461,7 +461,7 @@ export default function Page() {
       </section>
 
       {/* COST OF RTO */}
-      <section className="container-px py-14 sm:py-20">
+      <section className="container py-14 sm:py-20">
         <Head
           pill="What RTO really costs"
           title="COD returns cost more than the shipping label"
@@ -497,7 +497,7 @@ export default function Page() {
       </section>
 
       {/* HOW IT WORKS */}
-      <section className="container-px py-14 sm:py-20">
+      <section className="container py-14 sm:py-20">
         <Head
           pill="OTP verification"
           title="Verify the order before it ships, not after it fails"
@@ -608,7 +608,7 @@ export default function Page() {
       </Split>
 
       {/* COMPARE */}
-      <section className="container-px py-14 sm:py-20">
+      <section className="container py-14 sm:py-20">
         <Head
           pill="Shopify COD vs GulfCart"
           title="Shopify COD, with verification on top"
@@ -634,7 +634,7 @@ export default function Page() {
       </section>
 
       {/* COUNTRY LINKS */}
-      <section className="container-px pb-6">
+      <section className="container pb-6">
         <div className="grid gap-6 sm:grid-cols-2">
           {[
             {
@@ -662,7 +662,7 @@ export default function Page() {
       </section>
 
       {/* FAQ */}
-      <section className="container-px py-14 sm:py-20">
+      <section className="container py-14 sm:py-20">
         <Head pill="FAQ" title="Shopify COD: common questions" />
         <div className="mx-auto mt-10 max-w-3xl space-y-3">
           {faqs.map((f) => (
@@ -697,7 +697,7 @@ export default function Page() {
       </section>
 
       {/* FINAL CTA */}
-      <section className="container-px pb-20 sm:pb-28">
+      <section className="container pb-20 sm:pb-28">
         <div className="hero-glow rounded-3xl border border-gray-500/20 bg-gradient-to-br from-brand-accent/[0.08] via-white to-brand-surface px-6 py-12 text-center sm:py-16">
           <h2 className="mx-auto max-w-xl text-2xl font-semibold tracking-tight sm:text-3xl">
             Stop paying for COD orders that never arrive
