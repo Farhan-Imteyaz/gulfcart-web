@@ -20,7 +20,7 @@ const themes = [
 
 export default function CaseStudies() {
   return (
-    <section className="container py-16 sm:py-20 md:py-24">
+    <section className="container mx-auto py-16 sm:py-20 md:py-24">
       <div className="mx-auto max-w-2xl text-center">
         <span className="pill border border-brand-accent2/20 font-medium">
           Results

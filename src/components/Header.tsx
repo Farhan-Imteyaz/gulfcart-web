@@ -36,7 +36,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-gray-500/20 bg-white/85 backdrop-blur ">
-      <div className="container mx-auto flex h-16 items-center justify-between">
+      <div className="container mx-auto mx-auto flex h-16 items-center justify-between">
         <Link
           href="/"
           className="inline-flex items-center"
@@ -157,7 +157,10 @@ export default function Header() {
         id="mobile-nav"
         className={`overflow-y-auto border-gray-500/20 bg-white transition-[max-height] duration-300 md:hidden ${menu ? "max-h-[80vh] border-t" : "max-h-0"}`}
       >
-        <nav aria-label="Mobile" className="container space-y-1 py-4 text-sm">
+        <nav
+          aria-label="Mobile"
+          className="container mx-auto space-y-1 py-4 text-sm"
+        >
           {navGroups.map((g) => (
             <details key={g.label} className="group rounded-xl">
               <summary className="flex cursor-pointer list-none items-center justify-between rounded-xl px-3 py-3 font-medium hover:bg-tile-hover">

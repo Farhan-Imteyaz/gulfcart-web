@@ -3,7 +3,7 @@ import { site } from "@/lib/site";
 
 export default function FinalCta() {
   return (
-    <section className="container py-8 sm:py-10 md:py-12">
+    <section className="container mx-auto py-8 sm:py-10 md:py-12">
       <div className="relative mx-auto max-w-5xl overflow-hidden rounded-[2rem] border border-slate-800/60 bg-slate-950 shadow-[0_30px_80px_-40px_rgba(15,23,42,0.6)]">
         {/* Emerald radial glow — bottom-left */}
         <div

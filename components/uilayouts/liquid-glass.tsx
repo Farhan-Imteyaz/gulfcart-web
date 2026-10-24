@@ -73,7 +73,7 @@ export const LiquidGlassCard = ({
       '0 4px 4px rgba(0, 0, 0, 0.15), 0 0 12px rgba(0, 0, 0, 0.08), 0 0 60px rgba(255, 255, 255, 0.3)',
   };
 
-  const containerVariants = expandable
+  const container mx-autoVariants = expandable
     ? {
         collapsed: {
           width: width || 'auto',
@@ -99,7 +99,7 @@ export const LiquidGlassCard = ({
   const motionProps =
     draggable || expandable
       ? {
-          variants: expandable ? containerVariants : undefined,
+          variants: expandable ? container mx-autoVariants : undefined,
           animate: expandable ? (isExpanded ? 'expanded' : 'collapsed') : undefined,
           onClick: expandable ? handleToggleExpansion : undefined,
           drag: draggable,

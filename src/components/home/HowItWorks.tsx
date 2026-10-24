@@ -3,7 +3,7 @@ import { howItWorks } from "@/lib/content/home";
 export default function HowItWorks() {
   return (
     <section className="bg-brand-surface border-y border-gray-500/20">
-      <div className="container py-16 sm:py-20 md:py-24">
+      <div className="container mx-auto py-16 sm:py-20 md:py-24">
         {/* Section heading — centered */}
         <div className="mx-auto max-w-2xl text-center mb-10 sm:mb-12">
           <span className="inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700">

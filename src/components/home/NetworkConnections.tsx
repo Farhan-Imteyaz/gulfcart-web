@@ -2,8 +2,8 @@ export type NetworkNode = {
   id: string;
   label: string;
   back: string;
-  x: number; // % of container width
-  y: number; // % of container height
+  x: number; // % of container mx-auto width
+  y: number; // % of container mx-auto height
   tier: "core" | "extra"; // extra = hidden on small mobile
   dur: number;
   delay: number;
@@ -23,7 +23,11 @@ function curve(n: NetworkNode, i: number) {
   return `M${sx} ${sy} Q${cx} ${cy} ${W / 2} ${H / 2}`;
 }
 
-export default function NetworkConnections({ nodes }: { nodes: NetworkNode[] }) {
+export default function NetworkConnections({
+  nodes,
+}: {
+  nodes: NetworkNode[];
+}) {
   return (
     <svg
       viewBox={`0 0 ${W} ${H}`}
@@ -37,7 +41,12 @@ export default function NetworkConnections({ nodes }: { nodes: NetworkNode[] }) 
         const hide = "";
         return (
           <g key={n.id} className={hide}>
-            <path d={d} className="stroke-brand-accent/25" strokeWidth="1.25" vectorEffect="non-scaling-stroke" />
+            <path
+              d={d}
+              className="stroke-brand-accent/25"
+              strokeWidth="1.25"
+              vectorEffect="non-scaling-stroke"
+            />
             <path
               d={d}
               pathLength={100}
@@ -45,7 +54,12 @@ export default function NetworkConnections({ nodes }: { nodes: NetworkNode[] }) 
               strokeWidth="2"
               strokeLinecap="round"
               vectorEffect="non-scaling-stroke"
-              style={{ "--dur": `${n.dur}s`, "--d": `-${n.delay}s` } as React.CSSProperties}
+              style={
+                {
+                  "--dur": `${n.dur}s`,
+                  "--d": `-${n.delay}s`,
+                } as React.CSSProperties
+              }
             />
           </g>
         );

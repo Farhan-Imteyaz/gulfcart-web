@@ -24,7 +24,7 @@ export default function Page() {
         h1="Book a Demo"
         intro="See what GulfCart recovers on the checkout you already have. Pick whichever's easier — fill in the form or grab time directly."
       />
-      <div className="container pb-24">
+      <div className="container mx-auto pb-24">
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-14 max-w-5xl mx-auto">
           <div>
             <DemoForm />

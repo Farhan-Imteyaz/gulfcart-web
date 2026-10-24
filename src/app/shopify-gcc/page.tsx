@@ -316,7 +316,7 @@ export default function Page() {
     <>
       {/* HERO */}
       <section className="hero-glow relative overflow-hidden">
-        <div className="container py-12 sm:py-16 lg:py-20">
+        <div className="container mx-auto py-12 sm:py-16 lg:py-20">
           <div className="grid items-center gap-10 lg:grid-cols-[45fr_55fr] lg:gap-8">
             <div className="gc-in max-w-xl lg:max-w-none">
               <span className="pill border border-brand-accent2/20 font-medium">
@@ -346,7 +346,7 @@ export default function Page() {
 
       {/* STATS */}
       <section className="border-y border-gray-500/20 bg-brand-surface">
-        <div className="container grid gap-6 py-10 sm:grid-cols-3 sm:py-12">
+        <div className="container mx-auto grid gap-6 py-10 sm:grid-cols-3 sm:py-12">
           {stats.map((s, i) => (
             <GlowCard key={s.l} i={i}>
               <span
@@ -361,7 +361,7 @@ export default function Page() {
       </section>
 
       {/* COUNTRIES */}
-      <section className="container py-14 sm:py-20">
+      <section className="container mx-auto py-14 sm:py-20">
         <Head
           pill="Shopify checkout by country"
           title="One checkout setup for each GCC market"
@@ -408,7 +408,7 @@ export default function Page() {
       </section>
 
       {/* EXPANSION STEPS */}
-      <section className="container py-14 sm:py-20">
+      <section className="container mx-auto py-14 sm:py-20">
         <Head
           pill="GCC expansion"
           title="Expand across the GCC without rebuilding your store"
@@ -432,7 +432,7 @@ export default function Page() {
       </section>
 
       {/* LINKS */}
-      <section className="container pb-6">
+      <section className="container mx-auto pb-6">
         <div className="grid gap-6 sm:grid-cols-3">
           {[
             {
@@ -465,7 +465,7 @@ export default function Page() {
       </section>
 
       {/* FAQ */}
-      <section className="container py-14 sm:py-20">
+      <section className="container mx-auto py-14 sm:py-20">
         <Head
           pill="FAQ"
           title="Selling across the GCC on Shopify: common questions"
@@ -503,7 +503,7 @@ export default function Page() {
       </section>
 
       {/* FINAL CTA */}
-      <section className="container pb-20 sm:pb-28">
+      <section className="container mx-auto pb-20 sm:pb-28">
         <div className="hero-glow rounded-3xl border border-gray-500/20 bg-gradient-to-br from-brand-accent/[0.08] via-white to-brand-surface px-6 py-12 text-center sm:py-16">
           <h2 className="mx-auto max-w-xl text-2xl font-semibold tracking-tight sm:text-3xl">
             Open your next GCC market from the store you already have

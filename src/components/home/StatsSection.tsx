@@ -13,7 +13,7 @@ export default function StatsSection() {
         }}
       />
 
-      <div className="container relative py-3.5 md:py-4">
+      <div className="container mx-auto relative py-3.5 md:py-4">
         <div className="grid grid-cols-2 gap-2 md:grid-cols-4">
           {stats.map((s) => (
             <div

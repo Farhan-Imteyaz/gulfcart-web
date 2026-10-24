@@ -7,7 +7,7 @@ const d = (s: number) => ({ "--d": `${s}s` }) as React.CSSProperties;
 export default function Hero() {
   return (
     <section className="hero-glow relative overflow-hidden">
-      <div className="container py-14 sm:py-20 lg:py-24">
+      <div className="container mx-auto py-14 sm:py-20 lg:py-24">
         <div className="grid items-center gap-12 lg:grid-cols-[45fr_55fr] lg:gap-8">
           <div className="max-w-xl lg:max-w-none">
             <span

@@ -3,9 +3,9 @@ import { integrations } from "@/lib/content/home";
 export default function Integrations() {
   return (
     <section className="relative overflow-hidden">
-      <div className="container py-6 sm:py-8 md:py-10">
+      <div className="container mx-auto py-6 sm:py-8 md:py-10">
         <div className="mx-auto max-w-5xl">
-          {/* Framed container with diagonal split */}
+          {/* Framed container mx-auto with diagonal split */}
           <div className="relative overflow-hidden rounded-[2rem] border border-slate-200/70 bg-gradient-to-br from-slate-50 via-white to-emerald-50/30 shadow-[0_1px_2px_rgba(15,23,42,0.04),0_30px_60px_-40px_rgba(15,23,42,0.20)]">
             {/* Diagonal accent band */}
             <div

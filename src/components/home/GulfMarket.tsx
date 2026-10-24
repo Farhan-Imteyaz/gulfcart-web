@@ -13,7 +13,7 @@ export default function GulfMarket() {
         }}
       />
 
-      <div className="container py-16 sm:py-20 md:py-24">
+      <div className="container mx-auto py-16 sm:py-20 md:py-24">
         <div className="grid gap-10 md:grid-cols-2 md:items-center md:gap-12 lg:gap-16">
           {/* Left — image */}
           <div className="w-full order-2 md:order-1 md:justify-self-start">

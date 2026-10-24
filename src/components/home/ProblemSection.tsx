@@ -18,7 +18,7 @@ const causes = [
 
 export default function ProblemSection() {
   return (
-    <section className="container py-10 md:py-14">
+    <section className="container mx-auto py-10 md:py-14">
       <div className="rounded-3xl border border-gray-500/20 bg-slate-50/70 px-6 py-6 md:px-12 md:py-8">
         {/* Header */}
         <div className="mx-auto max-w-3xl text-center">

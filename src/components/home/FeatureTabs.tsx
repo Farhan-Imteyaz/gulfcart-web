@@ -313,7 +313,7 @@ export default function FeatureTabs() {
   };
 
   return (
-    <section className="container py-16 sm:py-20 md:py-24">
+    <section className="container mx-auto py-16 sm:py-20 md:py-24">
       <div className="mx-auto max-w-2xl text-center">
         <span className="pill">What we fix</span>
         <h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">
