@@ -2,7 +2,7 @@ import { howItWorks } from "@/lib/content/home";
 
 export default function HowItWorks() {
   return (
-    <section className="bg-brand-surface border-y border-brand-border">
+    <section className="bg-brand-surface border-y border-gray-500/20">
       <div className="container-px py-16 sm:py-20 md:py-24">
         {/* Section heading — centered */}
         <div className="mx-auto max-w-2xl text-center mb-10 sm:mb-12">
@@ -47,7 +47,10 @@ export default function HowItWorks() {
             {/* Steps */}
             <div className="relative grid gap-10 md:grid-cols-3 md:gap-8 lg:gap-12">
               {howItWorks.map((step, i) => (
-                <div key={step.step} className="flex flex-col items-center text-center">
+                <div
+                  key={step.step}
+                  className="flex flex-col items-center text-center"
+                >
                   {/* Step number */}
                   <span className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-sm font-semibold text-slate-800 shadow-sm">
                     {step.step}

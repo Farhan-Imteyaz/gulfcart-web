@@ -2,7 +2,7 @@ import { stats } from "@/lib/content/home";
 
 export default function StatsSection() {
   return (
-    <section className="relative overflow-hidden border-y border-brand-border/60 bg-brand-surface">
+    <section className="relative overflow-hidden border-y border-gray-500/20/60 bg-brand-surface">
       {/* Soft ambient glow */}
       <div
         aria-hidden="true"
@@ -25,7 +25,7 @@ export default function StatsSection() {
                 overflow-hidden
                 rounded-lg
                 border
-                border-brand-border/60
+                border-gray-500/20/60
                 bg-white/[0.45]
                 px-3
                 py-2.5
@@ -110,7 +110,7 @@ export default function StatsSection() {
                     font-medium
                     leading-[1.35]
                     tracking-wide
-                    text-brand-text/65
+                    text-fg/65
                     sm:text-[11px]
                   "
                 >
@@ -128,11 +128,11 @@ export default function StatsSection() {
                   h-[2px]
                   w-5
                   rounded-full
-                  bg-brand-accent2/50
+                  bg-accent2/50
                   transition-all
                   duration-300
                   group-hover:w-8
-                  group-hover:bg-brand-accent2
+                  group-hover:bg-accent2
                 "
               />
             </div>

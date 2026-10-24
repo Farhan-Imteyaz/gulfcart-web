@@ -1,7 +1,8 @@
 
 import Hero from './sections/Hero';
-import StatBand from './sections/StatBand';
-import Currency from './sections/Currency';
+
+import Currency from './sections/currency';
+import StatBand from './sections/StatBrand';
 import Leak from './sections/Leak';
 import Levers from './sections/Levers';
 import CheckoutShowcase from './sections/CheckoutShowcase';

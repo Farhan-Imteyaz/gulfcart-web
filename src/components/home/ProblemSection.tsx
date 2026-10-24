@@ -19,7 +19,7 @@ const causes = [
 export default function ProblemSection() {
   return (
     <section className="container-px py-10 md:py-14">
-      <div className="rounded-3xl border border-brand-border bg-slate-50/70 px-6 py-6 md:px-12 md:py-8">
+      <div className="rounded-3xl border border-gray-500/20 bg-slate-50/70 px-6 py-6 md:px-12 md:py-8">
         {/* Header */}
         <div className="mx-auto max-w-3xl text-center">
           <span className="inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700">
@@ -34,8 +34,8 @@ export default function ProblemSection() {
 
           <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
             Traffic lands, people browse, carts fill up — and most of that gets
-            lost in the last 90 seconds. Not because the product or the offer
-            is wrong, but because the checkout wasn't built for a Gulf buyer.
+            lost in the last 90 seconds. Not because the product or the offer is
+            wrong, but because the checkout wasn't built for a Gulf buyer.
           </p>
         </div>
 
@@ -58,9 +58,7 @@ export default function ProblemSection() {
                 {c.title}
               </h3>
 
-              <p className="mt-3 text-sm leading-6 text-slate-500">
-                {c.body}
-              </p>
+              <p className="mt-3 text-sm leading-6 text-slate-500">{c.body}</p>
             </div>
           ))}
         </div>

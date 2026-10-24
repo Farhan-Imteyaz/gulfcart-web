@@ -1,39 +1,63 @@
-import type { Metadata } from "next";
-import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
-import "./globals.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import { site } from "@/lib/site";
-import { cn } from "@/lib/utils";
+import type { Metadata } from 'next';
+import { Space_Grotesk, Manrope } from 'next/font/google';
+import './globals.css';
+import BackToTop from '@/components/ui/to-top';
 
-const jetbrainsMono = JetBrains_Mono({subsets:['latin'],variable:'--font-mono'});
+import Header from '@/components/Header';
+import Script from 'next/script';
+import Image from 'next/image';
+import Footer from '@/components/Footer';
 
-const body = Inter({
-  subsets: ["latin"],
-  variable: "--font-body",
-  display: "swap",
-});
+import PixelRouteTracker from '@/components/pixel-tracker';
 
-const display = Space_Grotesk({
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  variable: "--font-display",
-  display: "swap",
-});
+const display = Space_Grotesk({ subsets: ['latin'], weight: ['500', '600', '700'], variable: '--font-space-grotesk' });
+const body = Manrope({ subsets: ['latin'], weight: ['400', '500', '600', '700'], variable: '--font-manrope' });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(site.url),
-  title: { default: site.name, template: `%s | ${site.name}` },
-  description: site.tagline,
+  title: 'GulfCart — Checkout growth platform for Shopify brands in the Gulf',
+  description:
+    'True local currency, one-tap returning buyers, verified COD and country-level payment rules on the Shopify store you already run.',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={cn(body.variable, display.variable, "font-mono", jetbrainsMono.variable)}>
-      <body className="antialiased font-sans bg-brand-bg text-brand-text">
+    <html lang="en" data-theme="light" className={`${display.variable} ${body.variable}`}>
+      <head>
+        <Script id="facebook-pixel" strategy="afterInteractive">
+          {`
+            !function(f,b,e,v,n,t,s)
+            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}
+            (window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+            fbq('init', '1374440587883809');
+            fbq('track', 'PageView');
+          `}
+        </Script>
+
+        <meta name="google-site-verification" content="I8eKilxAfbdVS9RZWiThEdy1AKj_XDXJ5EdMdRAzfCo" />
+
+        <noscript>
+          <Image
+            height="1"
+            width="1"
+            style={{ display: "none" }}
+            src="https://www.facebook.com/tr?id=1374440587883809&ev=PageView&noscript=1"
+            alt=""
+          />
+        </noscript>
+      </head>
+      <body>
+        <PixelRouteTracker />
+        
         <Header />
-        <main>{children}</main>
+        {children}
         <Footer />
+        <BackToTop />
       </body>
     </html>
   );

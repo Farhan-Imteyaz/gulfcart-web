@@ -6,7 +6,8 @@ import DemoForm from "@/components/DemoForm";
 
 export const metadata: Metadata = pageMetadata({
   title: "Book a Demo",
-  description: "Book a 20 minute walkthrough of your Shopify checkout and see what GulfCart can lift.",
+  description:
+    "Book a 20 minute walkthrough of your Shopify checkout and see what GulfCart can lift.",
   path: "/book-a-demo",
 });
 
@@ -32,24 +33,40 @@ export default function Page() {
           <div className="flex flex-col justify-center">
             <ul className="space-y-3 mb-8">
               {bullets.map((b) => (
-                <li key={b} className="flex items-start gap-2.5 text-sm text-brand-muted">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="mt-0.5 flex-shrink-0 text-brand-accent2" aria-hidden="true">
-                    <path d="M3 8.5l3 3 7-7.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                <li
+                  key={b}
+                  className="flex items-start gap-2.5 text-sm text-muted"
+                >
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    className="mt-0.5 flex-shrink-0 text-brand-accent2"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M3 8.5l3 3 7-7.5"
+                      stroke="currentColor"
+                      strokeWidth="1.6"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                   {b}
                 </li>
               ))}
             </ul>
 
-            <div className="rounded-xl2 border border-brand-border bg-brand-surface p-6">
-              <p className="text-sm text-brand-muted mb-4">
+            <div className="rounded-xl2 border border-gray-500/20 bg-brand-surface p-6">
+              <p className="text-sm text-muted mb-4">
                 Prefer to pick a time yourself?
               </p>
               <a
                 href={site.calendlyUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block rounded-full border border-brand-accent text-brand-accent px-6 py-3 text-sm font-medium hover:bg-brand-accent hover:text-white transition-colors"
+                className="inline-block rounded-full border border-brand-accent text-brand-accent px-6 py-3 text-sm font-medium hover:bg-accent hover:text-white transition-colors"
               >
                 Book a call directly
               </a>

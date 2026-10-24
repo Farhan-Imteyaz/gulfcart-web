@@ -2,8 +2,21 @@
 
 import { useState, FormEvent } from "react";
 
-const countries = ["UAE", "Saudi Arabia", "Kuwait", "Qatar", "Bahrain", "Oman", "Other"];
-const orderVolumes = ["Under 200/mo", "200–1,000/mo", "1,000–5,000/mo", "5,000+/mo"];
+const countries = [
+  "UAE",
+  "Saudi Arabia",
+  "Kuwait",
+  "Qatar",
+  "Bahrain",
+  "Oman",
+  "Other",
+];
+const orderVolumes = [
+  "Under 200/mo",
+  "200–1,000/mo",
+  "1,000–5,000/mo",
+  "5,000+/mo",
+];
 
 export default function DemoForm() {
   const [status, setStatus] = useState<"idle" | "submitting" | "done">("idle");
@@ -22,9 +35,9 @@ export default function DemoForm() {
 
   if (status === "done") {
     return (
-      <div className="rounded-xl2 border border-brand-border bg-brand-surface p-8 text-center">
+      <div className="rounded-xl2 border border-gray-500/20 bg-brand-surface p-8 text-center">
         <p className="text-lg">Request received.</p>
-        <p className="mt-2 text-sm text-brand-muted">
+        <p className="mt-2 text-sm text-muted">
           We'll reach out within one business day to set up your walkthrough.
         </p>
       </div>
@@ -32,10 +45,13 @@ export default function DemoForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="rounded-xl2 border border-brand-border bg-brand-surface p-6 sm:p-8 space-y-5">
+    <form
+      onSubmit={handleSubmit}
+      className="rounded-xl2 border border-gray-500/20 bg-brand-surface p-6 sm:p-8 space-y-5"
+    >
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
-          <label htmlFor="name" className="block text-sm text-brand-muted mb-1.5">
+          <label htmlFor="name" className="block text-sm text-muted mb-1.5">
             Full name
           </label>
           <input
@@ -43,12 +59,12 @@ export default function DemoForm() {
             name="name"
             type="text"
             required
-            className="w-full rounded-lg border border-brand-border bg-brand-bg2 px-3.5 py-2.5 text-sm text-brand-text placeholder:text-brand-muted/60 focus:border-brand-accent"
+            className="w-full rounded-lg border border-gray-500/20 bg-brand-bg2 px-3.5 py-2.5 text-sm text-fg placeholder:text-muted/60 focus:border-brand-accent"
             placeholder="Your name"
           />
         </div>
         <div>
-          <label htmlFor="email" className="block text-sm text-brand-muted mb-1.5">
+          <label htmlFor="email" className="block text-sm text-muted mb-1.5">
             Work email
           </label>
           <input
@@ -56,14 +72,14 @@ export default function DemoForm() {
             name="email"
             type="email"
             required
-            className="w-full rounded-lg border border-brand-border bg-brand-bg2 px-3.5 py-2.5 text-sm text-brand-text placeholder:text-brand-muted/60 focus:border-brand-accent"
+            className="w-full rounded-lg border border-gray-500/20 bg-brand-bg2 px-3.5 py-2.5 text-sm text-fg placeholder:text-muted/60 focus:border-brand-accent"
             placeholder="you@brand.com"
           />
         </div>
       </div>
 
       <div>
-        <label htmlFor="store" className="block text-sm text-brand-muted mb-1.5">
+        <label htmlFor="store" className="block text-sm text-muted mb-1.5">
           Shopify store URL
         </label>
         <input
@@ -71,14 +87,14 @@ export default function DemoForm() {
           name="store"
           type="text"
           required
-          className="w-full rounded-lg border border-brand-border bg-brand-bg2 px-3.5 py-2.5 text-sm text-brand-text placeholder:text-brand-muted/60 focus:border-brand-accent"
+          className="w-full rounded-lg border border-gray-500/20 bg-brand-bg2 px-3.5 py-2.5 text-sm text-fg placeholder:text-muted/60 focus:border-brand-accent"
           placeholder="yourbrand.com or yourbrand.myshopify.com"
         />
       </div>
 
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
-          <label htmlFor="country" className="block text-sm text-brand-muted mb-1.5">
+          <label htmlFor="country" className="block text-sm text-muted mb-1.5">
             Primary market
           </label>
           <select
@@ -86,7 +102,7 @@ export default function DemoForm() {
             name="country"
             required
             defaultValue=""
-            className="w-full rounded-lg border border-brand-border bg-brand-bg2 px-3.5 py-2.5 text-sm text-brand-text focus:border-brand-accent"
+            className="w-full rounded-lg border border-gray-500/20 bg-brand-bg2 px-3.5 py-2.5 text-sm text-fg focus:border-brand-accent"
           >
             <option value="" disabled>
               Select a country
@@ -99,7 +115,7 @@ export default function DemoForm() {
           </select>
         </div>
         <div>
-          <label htmlFor="volume" className="block text-sm text-brand-muted mb-1.5">
+          <label htmlFor="volume" className="block text-sm text-muted mb-1.5">
             Monthly orders
           </label>
           <select
@@ -107,7 +123,7 @@ export default function DemoForm() {
             name="volume"
             required
             defaultValue=""
-            className="w-full rounded-lg border border-brand-border bg-brand-bg2 px-3.5 py-2.5 text-sm text-brand-text focus:border-brand-accent"
+            className="w-full rounded-lg border border-gray-500/20 bg-brand-bg2 px-3.5 py-2.5 text-sm text-fg focus:border-brand-accent"
           >
             <option value="" disabled>
               Select a range
@@ -124,7 +140,7 @@ export default function DemoForm() {
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="w-full rounded-full bg-brand-accent text-white px-6 py-3 text-sm font-medium hover:opacity-90 transition-opacity disabled:opacity-60"
+        className="w-full rounded-full bg-accent text-white px-6 py-3 text-sm font-medium hover:opacity-90 transition-opacity disabled:opacity-60"
       >
         {status === "submitting" ? "Sending…" : "Request a demo"}
       </button>

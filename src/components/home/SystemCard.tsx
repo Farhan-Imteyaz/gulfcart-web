@@ -1,15 +1,21 @@
 import type { ReactNode } from "react";
 
-export type SystemNode = { id: string; title: string; sub: string; tag: string; icon?: ReactNode };
+export type SystemNode = {
+  id: string;
+  title: string;
+  sub: string;
+  tag: string;
+  icon?: ReactNode;
+};
 
 const styles = {
   input: {
     card: "border-brand-accent/20 bg-gradient-to-br from-brand-accent/[0.08] via-white to-brand-accent/[0.03] shadow-brand-accent/10",
-    chip: "bg-brand-accent text-white shadow-brand-accent/30",
+    chip: "bg-accent text-white shadow-brand-accent/30",
   },
   output: {
     card: "border-brand-accent2/25 bg-gradient-to-br from-brand-accent2/[0.10] via-white to-brand-accent2/[0.03] shadow-brand-accent2/10",
-    chip: "bg-brand-accent2 text-white shadow-brand-accent2/30",
+    chip: "bg-accent2 text-white shadow-brand-accent2/30",
   },
 };
 
@@ -31,8 +37,12 @@ export default function SystemCard({
         {node.icon ?? node.tag}
       </span>
       <span className="min-w-0">
-        <span className="block text-sm font-semibold text-brand-text">{node.title}</span>
-        <span className="block text-xs leading-snug text-brand-muted">{node.sub}</span>
+        <span className="block text-sm font-semibold text-fg">
+          {node.title}
+        </span>
+        <span className="block text-xs leading-snug text-muted">
+          {node.sub}
+        </span>
       </span>
     </div>
   );

@@ -1,10 +1,9 @@
-'use client';
+"use client";
 
-import { useRef, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { Confetti, type ConfettiRef } from '@/components/ui/confetti';
-import { trackBookDemo, trackFormSubmit } from '@/lib/fbq';
-
+import { useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import { Confetti, type ConfettiRef } from "@/components/ui/confetti";
+import { trackBookDemo, trackFormSubmit } from "@/lib/fbq";
 
 export default function LeadForm() {
   const router = useRouter();
@@ -15,12 +14,12 @@ export default function LeadForm() {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(e.currentTarget).entries());
     try {
-      const res = await fetch('/api/email', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...data, mode: 'call' }),
+      const res = await fetch("/api/email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...data, mode: "call" }),
       });
-      if (!res.ok) throw new Error('Request failed');
+      if (!res.ok) throw new Error("Request failed");
       setSent(true);
       trackFormSubmit();
       confettiRef.current?.fire({
@@ -46,21 +45,29 @@ export default function LeadForm() {
 
       <div className="border-b border-outline/20 bg-accent/[.07] px-[30px] py-[22px]">
         <h2 className="font-display text-[22px] tracking-[-.02em] text-fg">
-          {sent ? "Leave your number, we'll call" : "Leave your number, we'll call"}
+          {sent
+            ? "Leave your number, we'll call"
+            : "Leave your number, we'll call"}
         </h2>
         <p className="mt-1 text-[13.5px]  text-muted">
-          A specialist calls you within one business day — no slides, just answers.
+          A specialist calls you within one business day — no slides, just
+          answers.
         </p>
       </div>
 
       <div className="px-[30px] pt-4 pb-[30px]">
         {sent ? (
           <div className="flex flex-col gap-3.5 pt-3.5 pb-1.5">
-            <div className="flex size-11 items-center justify-center rounded-full border border-accent/45 bg-accent/15 text-[19px] text-accent">✓</div>
-            <h3 className="font-display text-2xl tracking-[-.02em] text-fg">We'll call you.</h3>
+            <div className="flex size-11 items-center justify-center rounded-full border border-accent/45 bg-accent/15 text-[19px] text-accent">
+              ✓
+            </div>
+            <h3 className="font-display text-2xl tracking-[-.02em] text-fg">
+              We'll call you.
+            </h3>
             <p className="text-[15px] leading-relaxed text-muted">
-              A specialist will ring you within one business day at the time you picked. If it's urgent, email
-              support@gulfcart.ae and we'll bring it forward.
+              A specialist will ring you within one business day at the time you
+              picked. If it's urgent, email support@gulfcart.ae and we'll bring
+              it forward.
             </p>
             <button
               onClick={() => setSent(false)}
@@ -71,10 +78,17 @@ export default function LeadForm() {
           </div>
         ) : (
           <form onSubmit={onSubmit} className="flex flex-col gap-[13px]">
-            <div className='grid grid-cols-1 sm:grid-cols-2 gap-[13px]'>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-[13px]">
               <label className="flex flex-col gap-1.5">
-                <span className="text-xs font-semibold text-dim">Full name</span>
-                <input name="name" required placeholder="Your name" className="field" />
+                <span className="text-xs font-semibold text-dim">
+                  Full name
+                </span>
+                <input
+                  name="name"
+                  required
+                  placeholder="Your name"
+                  className="field"
+                />
               </label>
 
               <label className="flex flex-col gap-1.5">
@@ -93,17 +107,36 @@ export default function LeadForm() {
             <div className="grid grid-cols-1 gap-[13px] sm:grid-cols-2">
               <label className="flex flex-col gap-1.5">
                 <span className="text-xs font-semibold text-dim">Email</span>
-                <input name="email" required type="email" placeholder="you@brand.com" className="field" />
+                <input
+                  name="email"
+                  required
+                  type="email"
+                  placeholder="you@brand.com"
+                  className="field"
+                />
               </label>
               <label className="flex flex-col gap-1.5">
-                <span className="text-xs font-semibold text-dim">Phone number</span>
-                <input name="phone" required placeholder="+971 50 000 0000" className="field" />
+                <span className="text-xs font-semibold text-dim">
+                  Phone number
+                </span>
+                <input
+                  name="phone"
+                  required
+                  placeholder="+971 50 000 0000"
+                  className="field"
+                />
               </label>
             </div>
 
             <label className="flex flex-col gap-1.5">
-              <span className="text-xs font-semibold text-dim">Best time to call</span>
-              <select name="slot" defaultValue="Morning (9am – 12pm GST)" className="field">
+              <span className="text-xs font-semibold text-dim">
+                Best time to call
+              </span>
+              <select
+                name="slot"
+                defaultValue="Morning (9am – 12pm GST)"
+                className="field"
+              >
                 <option>Morning (9am – 12pm GST)</option>
                 <option>Afternoon (12pm – 4pm GST)</option>
                 <option>Evening (4pm – 8pm GST)</option>
@@ -112,7 +145,7 @@ export default function LeadForm() {
 
             <button
               type="submit"
-              className="mt-[5px] cursor-pointer rounded-[11px] bg-accent py-[15px] font-display text-[15.5px] font-bold tracking-[-.01em] text-ink hover:bg-accent-light"
+              className="mt-[5px] cursor-pointer rounded-[11px] bg-accent py-[15px] font-display text-[15.5px] font-bold tracking-[-.01em] text-fg hover:bg-accent-light"
             >
               Call me back
             </button>
@@ -120,8 +153,8 @@ export default function LeadForm() {
             <button
               type="button"
               onClick={() => {
-                trackBookDemo('form');
-                router.push('/book-a-demo');
+                trackBookDemo("form");
+                router.push("/book-a-demo");
               }}
               className="cursor-pointer rounded-[11px] border border-accent/80 py-[15px] font-display text-[15.5px] font-bold tracking-[-.01em] text-fg hover:border-accent/50"
             >
@@ -129,7 +162,9 @@ export default function LeadForm() {
             </button>
 
             <div className="mt-0.5 flex justify-center gap-3.5 text-[11.5px] text-ghost">
-              <span>Reply in 1 business day</span><span>·</span><span>Details never resold</span>
+              <span>Reply in 1 business day</span>
+              <span>·</span>
+              <span>Details never resold</span>
             </div>
           </form>
         )}
