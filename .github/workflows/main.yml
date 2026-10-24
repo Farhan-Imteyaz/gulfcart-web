@@ -77,7 +77,7 @@ jobs:
                 cwd: process.cwd(),
                 env: {
                   NODE_ENV: 'production',
-                  PORT: '3005',
+                  PORT: '3002',
                   RESEND_API_KEY: process.env.RESEND_KEY
 
                 }
