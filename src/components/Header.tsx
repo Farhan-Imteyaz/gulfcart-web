@@ -36,7 +36,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-gray-500/20 bg-white/85 backdrop-blur ">
-      <div className="container mx-auto mx-auto flex h-16 items-center justify-between">
+      <div className="container mx-auto  flex h-16 items-center justify-between">
         <Link
           href="/"
           className="inline-flex items-center"
