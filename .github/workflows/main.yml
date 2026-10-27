@@ -68,8 +68,10 @@ jobs:
             cp -r public .next/standalone/public
             
             # 3. Correctly write ecosystem.config.js using a Node script
-            RESEND_KEY="${{ secrets.RESEND_API_KEY }}" node -e "
-            const fs = require('fs');
+             RESEND_KEY="${{ secrets.RESEND_API_KEY }}" \
+              DATABASE_URL="file:./dev.db" \
+              node -e "
+              const fs = require('fs');
             const config = {
               apps: [{
                 name: 'Gulfcart-main',
@@ -78,7 +80,8 @@ jobs:
                 env: {
                   NODE_ENV: 'production',
                   PORT: '3002',
-                  RESEND_API_KEY: process.env.RESEND_KEY
+                  RESEND_API_KEY: process.env.RESEND_KEY,
+                  DATABASE_URL: process.env.DATABASE_URL
 
                 }
               }]
