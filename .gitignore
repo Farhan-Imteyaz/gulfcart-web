@@ -5,3 +5,10 @@ out
 .DS_Store
 
 /src/generated/prisma
+
+/public/uploads
+/prisma/dev.db
+dev.db
+*.db-journal
+*.db-wal
+*.db-shm

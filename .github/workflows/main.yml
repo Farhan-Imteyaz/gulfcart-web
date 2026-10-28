@@ -46,17 +46,38 @@ jobs:
         env:
           SSH_KEY: ${{ secrets.SSH_KEY }}
 
+      # NEW: safety net. Copies the SQLite file(s) and uploads aside before every deploy.
+      - name: Back up server data
+        run: |
+          ssh -i ~/.ssh/id_ed25519 -p 22 -o StrictHostKeyChecking=no \
+          ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+            set -e
+            cd ${{ secrets.APP_PATH }}
+            mkdir -p ~/backups
+            ts=$(date +%Y%m%d-%H%M%S)
+            [ -f dev.db ] && cp dev.db ~/backups/root-dev.db-$ts
+            [ -f prisma/dev.db ] && cp prisma/dev.db ~/backups/prisma-dev.db-$ts
+            [ -d public/uploads ] && tar czf ~/backups/uploads-$ts.tgz public/uploads
+            # keep the newest 20 backups
+            ls -1t ~/backups | tail -n +21 | xargs -r -I{} rm -f ~/backups/{}
+            echo "backup done: $ts"
+          EOF
+
       - name: Copy files to server
         run: |
           # CHANGED: '/node_modules' only skips the ROOT folder. The old
           # 'node_modules' pattern also skipped .next/node_modules and
           # .next/standalone/node_modules, which the standalone server needs.
-          # CHANGED: the SQLite file is protected from --delete / overwrite.
+          # CHANGED: SQLite files and public/uploads are protected from --delete / overwrite
+          # (rsync never deletes or overwrites an excluded path on the server).
+          # Better: move the DB outside the deploy folder, see the notes in chat.
           rsync -avz --delete \
             -e "ssh -i ~/.ssh/id_ed25519 -p 22 -o StrictHostKeyChecking=no" \
             --exclude='.git' \
             --exclude='/node_modules' \
+            --exclude='/dev.db*' \
             --exclude='/prisma/dev.db*' \
+            --exclude='/public/uploads' \
             --no-times \
             --no-perms \
             ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.APP_PATH }}/
