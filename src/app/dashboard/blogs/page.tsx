@@ -183,7 +183,7 @@ export default function BlogListPage() {
                 : "Try adjusting your filters or search term."}
             </p>
             {filter === "all" && !search && (
-              <Link href="/blog/new">
+              <Link href="/dashboard/blogs/new">
                 <Button size="sm" variant="secondary">
                   Create post
                 </Button>
