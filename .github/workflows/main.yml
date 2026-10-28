@@ -104,14 +104,14 @@ jobs:
             umask 077
             printf '%s\n' \
               'RESEND_API_KEY=${{ secrets.RESEND_API_KEY }}' \
-              'DATABASE_URL=file:./dev.db' \
+              'DATABASE_URL=file:./prisma/dev.db' \
               > .env
             chmod 600 .env
             echo ".env written ($(wc -l < .env) lines)."
 
             # 4. Write ecosystem.config.js (this is what pm2 actually passes to the app)
             RESEND_KEY='${{ secrets.RESEND_API_KEY }}' \
-            DATABASE_URL='file:./dev.db' \
+            DATABASE_URL='file:./prisma/dev.db' \
             node -e "
             const fs = require('fs');
             const config = {
