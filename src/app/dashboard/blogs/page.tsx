@@ -221,7 +221,7 @@ export default function BlogListPage() {
         )}
       </div>
 
-      <Link href="/blog/new" className="fixed bottom-5 right-5 z-20">
+      <Link href="/blogs/new" className="fixed bottom-5 right-5 z-20">
         <Button className="flex bg-accent text-ink items-center gap-1.5">
           <PlusIcon size={15} /> New Post
         </Button>
