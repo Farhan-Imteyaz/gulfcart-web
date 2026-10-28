@@ -25,7 +25,7 @@ const formatDate = (d: string | Date) =>
     day: "numeric",
   });
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://yoursite.com";
+const BASE_URL = "https://gulfcart.ae";
 
 /* ── Static params ── */
 export async function generateStaticParams() {
@@ -167,11 +167,11 @@ export default async function BlogPostPage({
     },
     image: post.coverImage
       ? {
-          "@type": "ImageObject",
-          url: post.coverImage,
-          width: 1200,
-          height: 630,
-        }
+        "@type": "ImageObject",
+        url: post.coverImage,
+        width: 1200,
+        height: 630,
+      }
       : undefined,
     keywords: post.metaKeywords ?? post.tags ?? undefined,
     articleSection: post.category ?? undefined,
@@ -287,7 +287,7 @@ export default async function BlogPostPage({
                   prose-img:rounded-xl prose-img:border prose-img:border-border
                   prose-hr:border-border
                   prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl"
-                  dangerouslySetInnerHTML={{ __html: normalizeBlankParagraphs(post.body) }}
+                dangerouslySetInnerHTML={{ __html: normalizeBlankParagraphs(post.body) }}
               />
             </div>
 
@@ -370,7 +370,7 @@ export default async function BlogPostPage({
 }
 
 
- function normalizeBlankParagraphs(html: string) {
+function normalizeBlankParagraphs(html: string) {
   // Matches <p></p>, <p><br></p>, <p><br/></p>, and whitespace-only variants
   return html.replace(/<p>(\s|<br\s*\/?>)*<\/p>/g, "<p>&nbsp;</p>");
 }
