@@ -57,6 +57,7 @@ jobs:
             ts=$(date +%Y%m%d-%H%M%S)
             [ -f dev.db ] && cp dev.db ~/backups/root-dev.db-$ts
             [ -f prisma/dev.db ] && cp prisma/dev.db ~/backups/prisma-dev.db-$ts
+            [ -f /home/gulfcart/data/blog.db ] && cp /home/gulfcart/data/blog.db ~/backups/blog.db-$ts
             [ -d public/uploads ] && tar czf ~/backups/uploads-$ts.tgz public/uploads
             # keep the newest 20 backups
             ls -1t ~/backups | tail -n +21 | xargs -r -I{} rm -f ~/backups/{}
@@ -89,6 +90,12 @@ jobs:
             set -e # Exit immediately if a command exits with a non-zero status
             cd ${{ secrets.APP_PATH }}
 
+            # 0. NEW: the database lives OUTSIDE the deploy folder, at an absolute path.
+            #    (A relative path breaks: the standalone server runs from .next/standalone.)
+            #    Refuse to deploy if it is missing, so the app never starts on an empty DB.
+            DB_FILE=/home/gulfcart/data/blog.db
+            [ -f "$DB_FILE" ] || { echo "ERROR: $DB_FILE not found. Copy your dev.db there first."; exit 1; }
+
             # 1. Install production dependencies
             npm ci --omit=dev --ignore-scripts
             # CHANGED: --ignore-scripts skips building native modules, so build this one here
@@ -104,14 +111,14 @@ jobs:
             umask 077
             printf '%s\n' \
               'RESEND_API_KEY=${{ secrets.RESEND_API_KEY }}' \
-              'DATABASE_URL=file:./prisma/dev.db' \
+              "DATABASE_URL=file:$DB_FILE" \
               > .env
             chmod 600 .env
             echo ".env written ($(wc -l < .env) lines)."
 
             # 4. Write ecosystem.config.js (this is what pm2 actually passes to the app)
             RESEND_KEY='${{ secrets.RESEND_API_KEY }}' \
-            DATABASE_URL='file:./prisma/dev.db' \
+            DATABASE_URL="file:$DB_FILE" \
             node -e "
             const fs = require('fs');
             const config = {
