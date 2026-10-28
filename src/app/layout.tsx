@@ -1,15 +1,8 @@
 import type { Metadata } from 'next';
 import { Space_Grotesk, Manrope } from 'next/font/google';
 import './globals.css';
-import BackToTop from '@/components/ui/to-top';
-
-import Header from '@/components/Header';
 import Script from 'next/script';
 import Image from 'next/image';
-import Footer from '@/components/Footer';
-
-import PixelRouteTracker from '@/components/pixel-tracker';
-
 const display = Space_Grotesk({ subsets: ['latin'], weight: ['500', '600', '700'], variable: '--font-space-grotesk' });
 const body = Manrope({ subsets: ['latin'], weight: ['400', '500', '600', '700'], variable: '--font-manrope' });
 
