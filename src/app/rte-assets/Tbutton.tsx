@@ -22,7 +22,7 @@ const TB = ({
       title={title}
       className={`flex items-center justify-center rounded px-1.5 py-1 text-base transition-colors
       ${active
-          ? "bg-primary text-white"
+          ? "bg-accent text-white"
           : "text-foreground/60 hover:bg-foreground/10 hover:text-foreground"
         }`}
     >

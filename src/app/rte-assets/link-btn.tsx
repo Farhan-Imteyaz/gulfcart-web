@@ -36,7 +36,7 @@ const LinkBtn = () => {
         type="button"
         title="Insert Link"
         className={`flex items-center justify-center rounded px-1.5 py-1 text-base transition-colors
-            ${editor.isActive("link") ? "bg-primary text-white" : "text-foreground/60 hover:bg-foreground/10 hover:text-foreground"}`}
+            ${editor.isActive("link") ? "bg-accent text-white" : "text-foreground/60 hover:bg-foreground/10 hover:text-foreground"}`}
       >
         <LinkIcon />
       </button>}>

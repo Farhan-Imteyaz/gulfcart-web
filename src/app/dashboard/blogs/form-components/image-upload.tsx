@@ -65,7 +65,7 @@ export const ImageUpload = ({
         onDrop={onDrop}
         className={`relative rounded-lg border-2 border-dashed transition-colors overflow-hidden
           ${previewUrl ? "border-border cursor-default" : "cursor-pointer hover:border-primary/60"}
-          ${dragging ? "border-primary bg-primary/5" : "border-border bg-surface"}`}
+          ${dragging ? "border-primary bg-accent/5" : "border-border bg-surface"}`}
       >
         {previewUrl ? (
           // ── Preview ──

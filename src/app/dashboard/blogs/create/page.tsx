@@ -256,7 +256,7 @@ export default function NewBlogPostPage() {
               >
                 {isSubmitting ? "Saving…" : "Save as Draft"}
               </Button>
-              <Button className="bg-primary text-surface cursor-pointer" type="submit" disabled={isSubmitting}>
+              <Button className="bg-accent text-surface cursor-pointer" type="submit" disabled={isSubmitting}>
                 {isSubmitting ? "Publishing…" : "Publish Post"}
               </Button>
             </div>
