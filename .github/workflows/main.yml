@@ -14,10 +14,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Setup Node.js 20
+      # CHANGED: match the server (node -v there is 22.x), so native modules load
+      - name: Setup Node.js 22
         uses: actions/setup-node@v3
         with:
-          node-version: "20"
+          node-version: "22"
 
       - name: Install dependencies
         run: npm ci
@@ -47,10 +48,15 @@ jobs:
 
       - name: Copy files to server
         run: |
+          # CHANGED: '/node_modules' only skips the ROOT folder. The old
+          # 'node_modules' pattern also skipped .next/node_modules and
+          # .next/standalone/node_modules, which the standalone server needs.
+          # CHANGED: the SQLite file is protected from --delete / overwrite.
           rsync -avz --delete \
             -e "ssh -i ~/.ssh/id_ed25519 -p 22 -o StrictHostKeyChecking=no" \
             --exclude='.git' \
-            --exclude='node_modules' \
+            --exclude='/node_modules' \
+            --exclude='/prisma/dev.db*' \
             --no-times \
             --no-perms \
             ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.APP_PATH }}/
@@ -61,20 +67,32 @@ jobs:
           ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
             set -e # Exit immediately if a command exits with a non-zero status
             cd ${{ secrets.APP_PATH }}
-            
+
             # 1. Install production dependencies
             npm ci --omit=dev --ignore-scripts
-            
+            # CHANGED: --ignore-scripts skips building native modules, so build this one here
+            npm rebuild better-sqlite3
+
             # 2. Setup Next.js standalone assets
             rm -rf .next/standalone/.next/static
             cp -r .next/static .next/standalone/.next/
+            rm -rf .next/standalone/public
             cp -r public .next/standalone/public
-            
-            # 3. Correctly write ecosystem.config.js using a Node script
-             RESEND_KEY="${{ secrets.RESEND_API_KEY }}" \
-              DATABASE_URL="file:./dev.db" \
-              node -e "
-              const fs = require('fs');
+
+            # 3. CHANGED: write .env from the GitHub secrets (this step did not exist)
+            umask 077
+            printf '%s\n' \
+              'RESEND_API_KEY=${{ secrets.RESEND_API_KEY }}' \
+              'DATABASE_URL=file:./dev.db' \
+              > .env
+            chmod 600 .env
+            echo ".env written ($(wc -l < .env) lines)."
+
+            # 4. Write ecosystem.config.js (this is what pm2 actually passes to the app)
+            RESEND_KEY='${{ secrets.RESEND_API_KEY }}' \
+            DATABASE_URL='file:./dev.db' \
+            node -e "
+            const fs = require('fs');
             const config = {
               apps: [{
                 name: 'Gulfcart-main',
@@ -85,15 +103,14 @@ jobs:
                   PORT: '3002',
                   RESEND_API_KEY: process.env.RESEND_KEY,
                   DATABASE_URL: process.env.DATABASE_URL
-
                 }
               }]
             };
             fs.writeFileSync('ecosystem.config.js', 'module.exports = ' + JSON.stringify(config, null, 2));
             console.log('ecosystem.config.js written successfully.');
             "
-            
-            # 4. Restart or Start the app via PM2
+
+            # 5. Restart or Start the app via PM2
             pm2 restart ecosystem.config.js --update-env || pm2 start ecosystem.config.js
             pm2 save
           EOF
