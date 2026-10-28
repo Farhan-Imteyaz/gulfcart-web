@@ -9,7 +9,7 @@ import Levers from '../sections/Levers';
 import CheckoutShowcase from '../sections/CheckoutShowcase';
 import BuyerNetwork from '../sections/BuyerNetwork';
 import Fit from '../sections/Fit';
-
+import Blogs from '../components/Blogs';
 import Pricing from '../sections/Pricing';
 import Faq from '../sections/Faq';
 import FinalCta from '../sections/FinalCta';
@@ -30,6 +30,7 @@ export default function Page() {
       <Fit />
       <Pricing />
       <Faq />
+      <Blogs />
       <FinalCta />
     </main>
   );

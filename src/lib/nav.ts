@@ -19,8 +19,10 @@ export const navGroups: NavGroup[] = [
       { href: "/shopify-gcc", label: "Kuwait, Qatar, Bahrain, Oman", desc: "The other GCC markets" },
     ],
   },
+
 ];
 
 export const navLinks: NavItem[] = [
   { href: "/gulfcart-vs-shopify-checkout", label: "Compare" },
+  { href: '/blogs', label: "Blogs" }
 ];
