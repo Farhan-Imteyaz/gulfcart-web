@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import BgLayer from "../components/BgLayer";
 const validEmail = "admin";
-const validPassword = "Imeet2026";
+const validPassword = ";awejri23jr";
 export default function LoginPage() {
   const router = useRouter();
   const [email, setEmail] = useState("");
@@ -29,13 +29,8 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen relative flex items-center justify-center bg-gray-100 px-4">
+    <div className="min-h-screen relative flex items-center justify-center bg-linear-to-br from-green-300 to-blue-400 px-4">
       <BgLayer />
-      <img
-        alt={""}
-        src={"/login.jpg"}
-        className="opacity-[.7] w-full absolute h-full object-cover inset-0 "
-      />
       <form
         onSubmit={handleLogin}
         className="w-full border border-slate-100 max-w-md relative z-20 bg-white backdrop-filter backdrop-blur-lg p-8 rounded-lg "
@@ -54,6 +49,7 @@ export default function LoginPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            placeholder="username"
             className="bg-slate-100 mt-2"
           />
         </div>
@@ -62,13 +58,14 @@ export default function LoginPage() {
           <Input
             type="password"
             className="bg-slate-100 mt-2"
+            placeholder={'*****'}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
         </div>
         <Button
-          className="w-full flex justify-center mt-10 bg-Bizgrowth consultancy-teal/50 hover:bg-Bizgrowth consultancy-tealDark hover:text-Bizgrowth consultancy-white"
+          className="w-full flex justify-center text-background mt-10 bg-accent  hover:bg-accent hover:text-background "
           type="submit"
         >
           Login

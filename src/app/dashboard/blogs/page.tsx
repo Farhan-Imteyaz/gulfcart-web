@@ -25,7 +25,7 @@ export type BlogPost = {
   createdAt: string;
   updatedAt: string;
   body: string;
-  
+
 };
 
 type FilterType = "all" | "published" | "draft";
@@ -222,7 +222,7 @@ export default function BlogListPage() {
       </div>
 
       <Link href="/blog/new" className="fixed bottom-5 right-5 z-20">
-        <Button className="flex items-center gap-1.5">
+        <Button className="flex bg-accent text-ink items-center gap-1.5">
           <PlusIcon size={15} /> New Post
         </Button>
       </Link>

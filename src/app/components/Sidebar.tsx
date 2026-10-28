@@ -123,8 +123,8 @@ export default function Sidebar() {
                         : "cursor-pointer"
                       }
                       ${isActive
-                        ? "bg-primary font-medium text-(--sb-text-primary)"
-                        : "text-(--sb-text-secondary) hover:bg-sb-item-hover"
+                        ? "bg-accent font-medium text-(--sb-text-primary)"
+                        : "text-fg-soft hover:text-ink-alt hover:bg-sidebar-primary"
                       }
                     `}
                   >

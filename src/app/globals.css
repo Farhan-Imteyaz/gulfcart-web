@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography"; /* DASHBOARD: needed for .prose (npm i -D @tailwindcss/typography) */
 
 /* Enables `dark:` variant utilities keyed off data-theme instead of OS preference, if you ever want them */
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
@@ -26,6 +27,31 @@
   --color-good: var(--good);
   --color-bad: var(--bad);
 
+  --color-background: var(--background);
+  /* DASHBOARD FIX: was var(--ink), which is the page background (near-black in dark mode) */
+  --color-foreground: var(--fg);
+  --color-primary: #de0f3f;
+  --color-border: var(--border);
+  --color-textPrimary: #675496;
+  /* DASHBOARD FIX: --muted-foreground was never defined in the new site */
+  --color-muted-foreground: var(--muted);
+  --color-sidebar: hsl(var(--sidebar-background));
+  --color-sidebar-foreground: hsl(var(--sidebar-foreground));
+  --color-sidebar-primary: hsl(var(--sidebar-primary));
+  --color-sidebar-primary-foreground: hsl(var(--sidebar-primary-foreground));
+  --color-sidebar-accent: hsl(var(--sidebar-accent));
+  --color-sidebar-accent-foreground: hsl(var(--sidebar-accent-foreground));
+  --color-sidebar-border: hsl(var(--sidebar-border));
+  --color-sidebar-ring: hsl(var(--sidebar-ring));
+
+  /* DASHBOARD: ported from old site */
+  --color-sb-text-primary: var(--sb-text-primary);
+  --color-sb-item-active: var(--sb-item-active);
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+  --animate-shimmer: shimmer 2s linear infinite;
+
   --font-display: "Space Grotesk", system-ui, sans-serif;
   --font-body: Manrope, system-ui, sans-serif;
 
@@ -44,6 +70,7 @@
 }
 
 @keyframes blip {
+
   0%,
   100% {
     opacity: 0.3;
@@ -54,7 +81,27 @@
   }
 }
 
+/* DASHBOARD: skeleton / loading shimmer */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
 @layer base {
+
+  /* Theme-independent tokens */
+  :root {
+    --radius: 0.5rem;
+    --primary: #ff4040;
+    --sb-text-primary: #f5f5f5;
+    --sb-item-active: var(--accent); /* old site used #ff4040; swap back if you want the red active item */
+  }
+
   /* Dark theme (default) */
   :root,
   [data-theme="dark"] {
@@ -81,6 +128,20 @@
     --accent-deep: #1668c7;
     --good: #4ade80;
     --bad: #ff7a6b;
+
+    /* DASHBOARD FIX: border was near-black on near-black; stray light --surface/--background removed */
+    --border: rgb(255 255 255 / 0.08);
+    --background: var(--ink);
+
+    /* DASHBOARD: sidebar (dark values, from old site's .dark) */
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   /* Light theme */
@@ -108,6 +169,18 @@
     --accent-deep: #0d47a1;
     --good: #16a34a;
     --bad: #dc2626;
+
+    --border: rgb(10 10 10 / 0.133);
+    --background: #fafbf9;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   /* Respect OS preference only if the user hasn't explicitly picked a theme */
@@ -136,6 +209,18 @@
       --accent-deep: #0d47a1;
       --good: #16a34a;
       --bad: #dc2626;
+
+      --border: rgb(10 10 10 / 0.133);
+      --background: #fafbf9;
+
+      --sidebar-background: 0 0% 98%;
+      --sidebar-foreground: 240 5.3% 26.1%;
+      --sidebar-primary: 240 5.9% 10%;
+      --sidebar-primary-foreground: 0 0% 98%;
+      --sidebar-accent: 240 4.8% 95.9%;
+      --sidebar-accent-foreground: 240 5.9% 10%;
+      --sidebar-border: 220 13% 91%;
+      --sidebar-ring: 217.2 91.2% 59.8%;
     }
   }
 
@@ -170,6 +255,38 @@
   }
 }
 
+/* DASHBOARD: editor + prose helpers, ported from old site */
+@layer utilities {
+  .mdxeditor-popup-container {
+    z-index: 99999 !important;
+  }
+
+  .editor-container {
+    width: 100%;
+  }
+
+  .mdx-editor {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .prose {
+    width: 100%;
+    max-width: none;
+  }
+
+  .prose :where(ul > li):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    padding-inline-start: 1.375em;
+  }
+
+  /* Old rule used hashed class names (_listItemUnchecked_1tncs_74) that change on every
+     @mdxeditor/editor upgrade, and had an invalid `top: "50%"`. Attribute selectors survive upgrades. */
+  [class*="_listItemUnchecked_"]:before,
+  [class*="_listItemChecked_"]:before {
+    transform: translateY(50%);
+  }
+}
+
 @utility shell {
   @apply mx-auto w-full max-w-[1200px];
 }
@@ -185,11 +302,12 @@
 @utility field {
   @apply w-full rounded-[10px] border border-white/10 bg-ink-alt px-3.5 py-3 text-[14.5px] text-fg outline-none focus:border-accent;
 }
+
 @utility container {
   max-width: 1280px;
   padding-right: 1rem;
   padding-left: 1rem;
-  maring:auto;
+  maring: auto;
 
 }
 
@@ -198,6 +316,7 @@
     from {
       transform: translateX(0);
     }
+
     to {
       transform: translateX(calc(-100% - var(--gap)));
     }
@@ -205,18 +324,22 @@
 }
 
 @keyframes gc-flip {
+
   0%,
   40% {
     transform: perspective(600px) rotateX(0deg);
   }
+
   50%,
   90% {
     transform: perspective(600px) rotateX(180deg);
   }
+
   100% {
     transform: perspective(600px) rotateX(360deg);
   }
 }
+
 .gc-flip {
   transform-style: preserve-3d;
   animation: gc-flip 8s ease-in-out var(--fd, 0s) infinite;
@@ -227,6 +350,7 @@
   isolation: isolate;
   border-radius: 1rem;
 }
+
 .gc-glow::before {
   content: "";
   position: absolute;
@@ -239,6 +363,7 @@
     background-position 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275),
     transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
+
 .gc-glow::after {
   content: "";
   position: absolute;
@@ -253,22 +378,27 @@
     filter 0.4s,
     opacity 0.4s;
 }
+
 .gc-glow:hover::before {
   background-position: 100% 100%;
   transform: rotate(-1.5deg) scale(1.02);
 }
+
 .gc-glow:hover::after {
   filter: blur(28px);
   opacity: 0.55;
 }
+
 .gc-glow-blue {
   --c1: #3d63dd;
   --c2: #0e9f6e;
 }
+
 .gc-glow-green {
   --c1: #0e9f6e;
   --c2: #b08a4e;
 }
+
 .gc-glow-gold {
   --c1: #b08a4e;
   --c2: #3d63dd;
@@ -290,17 +420,14 @@ h3 {
 
 .hero-glow {
   background:
-    radial-gradient(
-      60% 60% at 80% 20%,
+    radial-gradient(60% 60% at 80% 20%,
       rgba(61, 99, 221, 0.12),
-      transparent 70%
-    ),
-    radial-gradient(
-      40% 40% at 10% 80%,
+      transparent 70%),
+    radial-gradient(40% 40% at 10% 80%,
       rgba(176, 138, 78, 0.1),
-      transparent 70%
-    );
+      transparent 70%);
 }
+
 .pill {
   @apply inline-block rounded-full bg-accent text-fg text-xs px-3 py-1;
 }
@@ -315,33 +442,41 @@ h3 {
     opacity: 0;
     transform: translateY(14px);
   }
+
   to {
     opacity: 1;
     transform: none;
   }
 }
+
 @keyframes gc-float {
+
   0%,
   100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-6px);
   }
 }
+
 @keyframes gc-signal {
   from {
     stroke-dashoffset: 8;
   }
+
   to {
     stroke-dashoffset: -100;
   }
 }
+
 @keyframes gc-pulse {
   0% {
     transform: scale(1);
     opacity: 0.5;
   }
+
   100% {
     transform: scale(1.7);
     opacity: 0;
@@ -352,13 +487,16 @@ h3 {
   animation: gc-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
   animation-delay: var(--d, 0s);
 }
+
 .gc-float {
   animation: gc-float var(--dur, 5s) ease-in-out var(--d, 0s) infinite;
 }
+
 .gc-signal {
   stroke-dasharray: 8 92;
   animation: gc-signal var(--dur, 3.5s) linear var(--d, 0s) infinite;
 }
+
 .gc-pulse {
   animation: gc-pulse 3s ease-out infinite;
 }
@@ -368,13 +506,76 @@ h3 {
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
+
   .gc-in,
   .gc-float,
   .gc-pulse {
     animation: none !important;
   }
+
   .gc-signal {
     animation: none !important;
     opacity: 0;
   }
+}
+
+
+.rte-editor .tiptap {
+  @apply h-60 overflow-y-auto p-4 outline-none text-foreground/80;
+}
+
+.rte-editor .tiptap a {
+  @apply text-blue-500 underline cursor-pointer;
+}
+
+.rte-editor .tiptap p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  /* DASHBOARD FIX: --foreground-muted was never defined */
+  color: var(--muted);
+  pointer-events: none;
+  float: left;
+  height: 0;
+}
+
+.rte-editor .tiptap h1 {
+  @apply text-3xl font-bold mb-3;
+}
+
+.rte-editor .tiptap h2 {
+  @apply text-2xl font-semibold mb-2;
+}
+
+.rte-editor .tiptap h3 {
+  @apply text-xl font-semibold mb-2;
+}
+
+
+.rte-editor .tiptap ul {
+  @apply list-disc ml-6;
+}
+
+.rte-editor .tiptap ol {
+  @apply list-decimal ml-6;
+}
+
+.rte-editor .tiptap blockquote {
+  @apply border-l-4 border-gray-600 pl-4 italic text-foreground;
+}
+
+.rte-editor .tiptap pre {
+  @apply bg-gray-900 text-gray-100 rounded-md p-3 overflow-x-auto;
+}
+
+.rte-editor .tiptap code {
+  @apply bg-gray-800 text-pink-400 px-1 py-0.5 rounded;
+}
+
+.prose p:empty::before {
+  content: "\00a0";
+  display: inline-block;
+}
+
+.prose p+br+p {
+  margin-top: 2rem;
+  /* consistent visual breathing room, not tied to line count */
 }
