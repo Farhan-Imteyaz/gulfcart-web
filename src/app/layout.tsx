@@ -5,7 +5,8 @@ import Script from 'next/script';
 import Image from 'next/image';
 const display = Space_Grotesk({ subsets: ['latin'], weight: ['500', '600', '700'], variable: '--font-space-grotesk' });
 const body = Manrope({ subsets: ['latin'], weight: ['400', '500', '600', '700'], variable: '--font-manrope' });
-
+import JsonLd from './components/jsonLd';
+import { graph, organizationSchema, websiteSchema } from "@/lib/schema";
 export const metadata: Metadata = {
   title: 'GulfCart — Checkout growth platform for Shopify brands in the Gulf',
   description:
@@ -45,12 +46,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </noscript>
       </head>
       <body>
-        
-        
-       
+
+
+        <JsonLd data={graph(organizationSchema, websiteSchema)} />
         {children}
-       
-        
+
+
       </body>
     </html>
   );
