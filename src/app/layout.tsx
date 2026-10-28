@@ -52,12 +52,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </noscript>
       </head>
       <body>
-        <PixelRouteTracker />
         
-        <Header />
+        
+       
         {children}
-        <Footer />
-        <BackToTop />
+       
+        
       </body>
     </html>
   );
