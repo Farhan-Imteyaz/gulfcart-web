@@ -27,14 +27,7 @@ const formatDate = (d: string | Date) =>
 
 const BASE_URL = "https://gulfcart.ae";
 
-/* ── Static params ── */
-export async function generateStaticParams() {
-  const posts = await prisma.blogPost.findMany({
-    where: { status: "published" },
-    select: { slug: true },
-  });
-  return posts.map((p) => ({ slug: p.slug }));
-}
+
 
 /* ── Metadata ── */
 export async function generateMetadata({
