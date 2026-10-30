@@ -1,43 +1,46 @@
 import { MetadataRoute } from "next";
 import { site } from "@/lib/site";
+import prisma from "@/lib/prisma";
+
+export const revalidate = 3600; // refresh sitemap hourly
 
 const paths = [
   "/",
   "/shopify-checkout",
-  "/shopify-checkout-optimization",
   "/shopify-cod",
-  "/cod-fraud-prevention",
-  "/shopify-rto-reduction",
   "/shopify-payment-methods",
-  "/shopify-multi-currency",
   "/shopify-markets",
   "/shopify-checkout-uae",
   "/shopify-checkout-saudi-arabia",
-  "/shopify-checkout-kuwait",
-  "/shopify-checkout-qatar",
-  "/shopify-checkout-bahrain",
-  "/shopify-checkout-oman",
-  "/shopify-payment-gateway-uae",
-  "/shopify-payment-gateway-saudi-arabia",
-  "/add-tabby-to-shopify",
-  "/add-tamara-to-shopify",
-  "/shopify-cod-verification",
-  "/shopify-one-click-checkout",
-  "/shopify-country-discounts",
-  "/shopify-fraud-prevention",
-  "/compare/gulfcart-vs-shopify-checkout",
-  "/compare/gulfcart-vs-shopify-markets",
-  "/compare/shopify-native-cod-vs-gulfcart",
-  "/compare/tabby-vs-tamara",
-  "/compare/shopify-checkout-vs-localised-gcc",
+  "/shopify-gcc",
+  "/gulfcart-vs-shopify-checkout",
+  "/blogs",
   "/book-a-demo",
 ];
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  return paths.map((p) => ({
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const staticPages: MetadataRoute.Sitemap = paths.map((p) => ({
     url: `${site.url}${p}`,
     lastModified: new Date(),
     changeFrequency: "weekly",
     priority: p === "/" ? 1 : 0.7,
   }));
+
+  let blogPages: MetadataRoute.Sitemap = [];
+  try {
+    const posts = await prisma.blogPost.findMany({
+  where: { status: "published", noIndex: false },
+  select: { slug: true, updatedAt: true },
+});
+    blogPages = posts.map((post) => ({
+      url: `${site.url}/blogs/${post.slug}`,
+      lastModified: post.updatedAt,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    }));
+  } catch (e) {
+    console.error("Sitemap: failed to load blogs", e);
+  }
+
+  return [...staticPages, ...blogPages];
 }
