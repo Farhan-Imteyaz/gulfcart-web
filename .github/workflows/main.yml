@@ -52,7 +52,7 @@ jobs:
           ssh -i ~/.ssh/id_ed25519 -p 22 -o StrictHostKeyChecking=no \
           ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
             set -e
-            cd ${{ secrets.APP_PATH }}
+            cd /home/gulfcart/gulfcart
             mkdir -p ~/backups
             ts=$(date +%Y%m%d-%H%M%S)
             [ -f dev.db ] && cp dev.db ~/backups/root-dev.db-$ts
@@ -81,14 +81,14 @@ jobs:
             --exclude='/public/uploads' \
             --no-times \
             --no-perms \
-            ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.APP_PATH }}/
+            ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/gulfcart/gulfcart/
 
       - name: Install & Restart on server
         run: |
           ssh -i ~/.ssh/id_ed25519 -p 22 -o StrictHostKeyChecking=no \
           ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
             set -e # Exit immediately if a command exits with a non-zero status
-            cd ${{ secrets.APP_PATH }}
+            cd /home/gulfcart/gulfcart
 
             # 0. NEW: the database lives OUTSIDE the deploy folder, at an absolute path.
             #    (A relative path breaks: the standalone server runs from .next/standalone.)
